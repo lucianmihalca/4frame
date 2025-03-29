@@ -13,7 +13,7 @@ const tmdbApi = axios.create({
 });
 
 export const tmdbServices = {
-  getPopularShows: async (page: number = 1): Promise<IApiResponse> => {
+  getTvSeriesPopular: async (page: number = 1): Promise<IApiResponse> => {
     const response = await tmdbApi.get<IApiResponse>("/tv/popular", {
       params: { page },
     });
@@ -21,12 +21,12 @@ export const tmdbServices = {
     return response.data;
   },
 
-  getShowDetails: async (id: number): Promise<IShowDetails> => {
+  getTvSeriesDetails: async (id: number): Promise<IShowDetails> => {
     const response = await tmdbApi.get<IShowDetails>(`/tv/${id}`);
     return response.data;
   },
 
-  searchShows: async (query: string, page: number = 1): Promise<IApiResponse> => {
+  searchTv: async (query: string, page: number = 1): Promise<IApiResponse> => {
     const response = await tmdbApi.get<IApiResponse>("/search/tv", {
       params: { query, page },
     });
