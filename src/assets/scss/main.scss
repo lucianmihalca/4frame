@@ -1,0 +1,99 @@
+@import "variables";
+@import "mixins";
+
+// Reset y estilos base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: $spacing-md;
+
+  @include responsive(md) {
+    padding: $spacing-lg;
+  }
+}
+
+a {
+  color: $secondary-color;
+  text-decoration: none;
+  @include transition();
+
+  &:hover {
+    color: lighten($secondary-color, 10%);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.grid-shows {
+  @include grid(1fr, $spacing-md);
+
+  @include responsive(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include responsive(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include responsive(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  background-color: $secondary-color;
+  color: white;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  @include transition();
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+
+  &--primary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+
+  &--accent {
+    background-color: $accent-color;
+
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
+}
