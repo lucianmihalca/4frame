@@ -1,5 +1,6 @@
-@import "variables";
-@import "mixins";
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
 
 // Reset y estilos base
 * {
@@ -39,7 +40,7 @@ a {
   @include transition();
 
   &:hover {
-    color: lighten($secondary-color, 10%);
+    color: color.adjust($secondary-color, $lightness: 10%);
   }
 }
 
@@ -78,14 +79,14 @@ a {
   @include transition();
 
   &:hover {
-    background-color: darken($secondary-color, 10%);
+    background-color: color.adjust($secondary-color, $lightness: 10%);
   }
 
   &--primary {
     background-color: $secondary-color;
 
     &:hover {
-      background-color: darken($secondary-color, 10%);
+      background-color: color.adjust($secondary-color, $lightness: 10%);
     }
   }
 
@@ -93,7 +94,7 @@ a {
     background-color: $accent-color;
 
     &:hover {
-      background-color: darken($accent-color, 10%);
+      background-color: color.adjust($accent-color, $lightness: 10%);
     }
   }
 }

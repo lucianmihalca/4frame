@@ -12,7 +12,7 @@ const tmdbApi = axios.create({
   },
 });
 
-export const tmdbServices = {
+export const tmdbService = {
   getTvSeriesPopular: async (page: number = 1): Promise<IApiResponse> => {
     const response = await tmdbApi.get<IApiResponse>("/tv/popular", {
       params: { page },
