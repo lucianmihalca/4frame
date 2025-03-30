@@ -70,5 +70,5 @@ const goToSearch = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/layout/header-layout.scss";
+@use "../../assets/scss/layout/_header.scss";
 </style>

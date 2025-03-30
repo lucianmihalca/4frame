@@ -33,4 +33,25 @@ export const tmdbService = {
 
     return response.data;
   },
+
+  getMoviesPopular: async (page: number = 1): Promise<IApiResponse> => {
+    const response = await tmdbApi.get<IApiResponse>("/movie/popular", {
+      params: { page },
+    });
+
+    return response.data;
+  },
+
+  getMovieDetails: async (id: number): Promise<IShowDetails> => {
+    const response = await tmdbApi.get<IShowDetails>(`/movie/${id}`);
+    return response.data;
+  },
+
+  searchMovies: async (query: string, page: number = 1): Promise<IApiResponse> => {
+    const response = await tmdbApi.get<IApiResponse>("/search/movie", {
+      params: { query, page },
+    });
+
+    return response.data;
+  },
 };

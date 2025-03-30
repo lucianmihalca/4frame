@@ -1,15 +1,30 @@
-export interface IShow {
+// Interfaz base común
+export interface IMediaBase {
   id: number;
-  name: string;
   overview: string;
   poster_path: string;
   backdrop_path: string;
   vote_average: number;
-  first_air_date: string;
   popularity: number;
   genre_ids: number[];
 }
 
+// Interfaz para series
+export interface IShow extends IMediaBase {
+  name: string;
+  first_air_date: string;
+}
+
+// Interfaz para películas
+export interface IMovie extends IMediaBase {
+  title: string;
+  release_date: string;
+}
+
+// Interfaz para resultados que pueden ser película o serie
+export type IMedia = IMovie | IShow;
+
+// Detalles para series
 export interface IShowDetails extends IShow {
   created_by: ICreator[];
   episode_run_time: number[];
@@ -28,6 +43,23 @@ export interface IShowDetails extends IShow {
   vote_count: number;
 }
 
+// Interfaz para detalles de películas
+export interface IMovieDetails extends IMovie {
+  genres: IGenre[];
+  homepage: string;
+  production_companies: ICompany[];
+  runtime: number;
+  status: string;
+  tagline: string;
+  vote_count: number;
+  budget: number;
+  revenue: number;
+}
+
+// Tipo que representa detalles de cualquier medio
+export type IMediaDetails = IShowDetails | IMovieDetails;
+
+// Interfaces para componentes de medios
 export interface ICreator {
   id: number;
   name: string;
@@ -63,9 +95,10 @@ export interface ISeason {
   season_number: number;
 }
 
+// Respuesta API (ahora maneja tanto películas como series)
 export interface IApiResponse {
   page: number;
-  results: IShow[];
+  results: IMedia[];
   total_pages: number;
   total_results: number;
 }
