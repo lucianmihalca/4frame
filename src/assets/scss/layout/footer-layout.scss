@@ -1,0 +1,175 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.footer {
+  background-color: $primary-color;
+  color: $text-color;
+  padding-top: $spacing-xl;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+  }
+
+  // Primera fila
+  .footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  // Sección de enlaces
+  .footer-links {
+    flex: 1;
+    min-width: 280px;
+
+    h3 {
+      margin-bottom: $spacing-md;
+      font-size: 1.2rem;
+    }
+
+    .links-grid {
+      display: flex;
+      gap: $spacing-xl;
+
+      @media (max-width: 576px) {
+        flex-direction: column;
+        gap: $spacing-md;
+      }
+    }
+
+    .links-column {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      a {
+        color: color.adjust($text-color, $lightness: -20%);
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+
+  // Sección About Us
+  .footer-about {
+    flex: 1;
+    min-width: 280px;
+
+    h3 {
+      margin-bottom: $spacing-md;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin-bottom: $spacing-md;
+      line-height: 1.5;
+      font-size: 0.9rem;
+      color: color.adjust($text-color, $lightness: -10%);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      color: color.adjust($text-color, $lightness: -30%);
+    }
+
+    strong {
+      color: $text-color;
+    }
+  }
+
+  // Sección de características
+  .footer-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-xl;
+    padding: $spacing-md 0;
+    margin-bottom: $spacing-lg;
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      .feature-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+        color: #fff;
+
+        &.instagram {
+          color: #e4405f;
+        }
+
+        &.facebook {
+          color: #1877f2;
+        }
+
+        &.twitter {
+          color: #1da1f2;
+        }
+
+        &.youtube {
+          color: #ff0000;
+        }
+      }
+
+      .quality-icon {
+        background-color: #3b7b4f;
+        color: #9fedb4;
+      }
+
+      .free-icon {
+        background-color: #3a4c8e;
+        color: #94a8ff;
+      }
+
+      .fast-icon {
+        background-color: #8e3a3a;
+        color: #ffaaa3;
+      }
+
+      .subtitle-icon {
+        background-color: #6b3a8e;
+        color: #d5a3ff;
+      }
+
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Navegación inferior
+  .footer-bottom {
+    border-top: 1px solid color.adjust($primary-color, $lightness: 10%);
+    padding: $spacing-md 0;
+
+    .bottom-nav {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-lg;
+
+      a {
+        color: color.adjust($text-color, $lightness: -30%);
+        text-decoration: none;
+        font-size: 0.8rem;
+
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+}
