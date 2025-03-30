@@ -1,5 +1,7 @@
 @use "variables" as *;
 
+// FLEXBOX
+// Contenedor flexible con parámetros personalizados.
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
   display: flex;
   flex-direction: $direction;
@@ -8,32 +10,60 @@
   flex-wrap: $wrap;
 }
 
+// GRID
+// Atajo para grid con columnas y separación ajustable.
 @mixin grid($columns: 1fr, $gap: 1rem) {
   display: grid;
   grid-template-columns: $columns;
   gap: $gap;
 }
 
+// RESPONSIVE
+// Media query basada en breakpoint semántico.
 @mixin responsive($breakpoint) {
-  @if $breakpoint == sm {
-    @media (min-width: $breakpoint-sm) {
-      @content;
-    }
-  } @else if $breakpoint == md {
-    @media (min-width: $breakpoint-md) {
-      @content;
-    }
-  } @else if $breakpoint == lg {
-    @media (min-width: $breakpoint-lg) {
-      @content;
-    }
-  } @else if $breakpoint == xl {
-    @media (min-width: $breakpoint-xl) {
+  $value: if(
+    $breakpoint == sm,
+    $breakpoint-sm,
+    if(
+      $breakpoint == md,
+      $breakpoint-md,
+      if($breakpoint == lg, $breakpoint-lg, if($breakpoint == xl, $breakpoint-xl, null))
+    )
+  );
+
+  @if $value != null {
+    @media (min-width: $value) {
       @content;
     }
   }
 }
 
+// TRANSITION
+// Aplica transición reutilizable con duración y timing.
 @mixin transition($property: all, $duration: 0.3s, $timing: ease) {
   transition: $property $duration $timing;
+}
+
+// LINK UNDERLINE
+// Subrayado animado al hover y activo
+@mixin underline-hover($color: $secondary-color, $height: 2px, $duration: 0.3s, $origin: left) {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $height;
+    background-color: $color;
+    transform: scaleX(0);
+    transform-origin: $origin;
+    transition: transform $duration ease;
+  }
+
+  &:hover::after,
+  &.router-link-active::after {
+    transform: scaleX(1);
+  }
 }

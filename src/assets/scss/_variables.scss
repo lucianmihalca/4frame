@@ -1,16 +1,41 @@
-// Colores
-$primary-color: #1e293b;
-$secondary-color: #0ea5e9;
-$text-color: #f8fafc;
-$background-color: #0f172a;
-$card-background: #334155;
-$accent-color: #f59e0b;
+// Colores base
+$blue-900: #1e293b;
+$blue-800: #334155;
+$blue-700: #0f172a;
+$sky-500: #0ea5e9;
+$amber-500: #f59e0b;
+$gray-100: #f8fafc;
 
-// Fuentes
+// Colores semánticos
+$primary-color: $blue-900;
+$secondary-color: $sky-500;
+$accent-color: $amber-500;
+$text-color: $gray-100;
+$background-color: $blue-700;
+$card-background: $blue-800;
+
+// Tipografía
 $font-family-base: "Inter", sans-serif;
-$font-size-base: 16px;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-xxl: 2rem; // 32px
+
 $font-weight-normal: 400;
 $font-weight-bold: 700;
+
+// Interlineado
+$line-height-xs: 1.2;
+$line-height-sm: 1.4;
+$line-height-base: 1.5;
+$line-height-lg: 1.6;
+$line-height-xl: 1.75;
+
+// Contenedor
+$container-max-width: 1200px;
 
 // Breakpoints
 $breakpoint-sm: 576px;
@@ -18,7 +43,7 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 
-//Spacing
+// Espaciado
 $spacing-xs: 0.25rem;
 $spacing-sm: 0.5rem;
 $spacing-md: 1rem;
@@ -26,7 +51,24 @@ $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
 $spacing-xxl: 3rem;
 
-// Border radius
+// Bordes
 $border-radius-sm: 0.25rem;
 $border-radius-md: 0.5rem;
 $border-radius-lg: 1rem;
+$border-radius-xl: 2rem;
+
+// Altura
+$height-xs: 2rem; // 32px
+$height-sm: 2.5rem; // 40px
+$height-md: 3rem; // 48px
+$height-lg: 3.5rem; // 56px
+
+// Avatar / iconos
+$avatar-size-sm: 32px;
+$avatar-size-md: 40px;
+$avatar-size-lg: 56px;
+
+// Header
+$header-height-sm: 56px;
+$header-height-md: 64px;
+$header-height-lg: 72px;

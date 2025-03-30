@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "../variables" as *;
 @use "../mixins" as *;
+@use "sass:math";
 
 .footer {
   background-color: $primary-color;
@@ -8,12 +9,11 @@
   padding-top: $spacing-xl;
 
   .container {
-    max-width: 1200px;
+    max-width: $container-max-width;
     margin: 0 auto;
     padding: 0 $spacing-md;
   }
 
-  // Primera fila
   .footer-main {
     display: flex;
     flex-wrap: wrap;
@@ -25,151 +25,142 @@
     }
   }
 
-  // Sección de enlaces
+  // Columna de enlaces
   .footer-links {
-    flex: 1;
+    flex: 0 0 calc(50% - #{math.div($spacing-xl, 2)});
     min-width: 280px;
 
-    h3 {
-      margin-bottom: $spacing-md;
-      font-size: 1.2rem;
-    }
-
-    .links-grid {
+    .links-groups {
       display: flex;
+      justify-content: space-between;
       gap: $spacing-xl;
 
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         flex-direction: column;
-        gap: $spacing-md;
       }
     }
 
-    .links-column {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-sm;
+    .links-group {
+      flex: 1;
 
-      a {
-        color: color.adjust($text-color, $lightness: -20%);
-        text-decoration: none;
-        font-size: 0.9rem;
+      h3 {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-lg;
+      }
 
-        &:hover {
-          color: $secondary-color;
+      .links-column {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+
+        a {
+          display: inline-flex;
+          align-self: flex-start;
+          position: relative;
+          color: color.adjust($text-color, $lightness: -20%);
+          text-decoration: none;
+          font-size: $font-size-sm;
+          @include underline-hover($secondary-color, 2px, 0.3s, center);
         }
       }
     }
   }
 
-  // Sección About Us
-  .footer-about {
-    flex: 1;
+  // Columna derecha: About + Redes
+  .footer-about-container {
+    flex: 0 0 calc(50% - #{math.div($spacing-xl, 2)});
+
     min-width: 280px;
 
-    h3 {
-      margin-bottom: $spacing-md;
-      font-size: 1.2rem;
-    }
-
-    p {
-      margin-bottom: $spacing-md;
-      line-height: 1.5;
-      font-size: 0.9rem;
-      color: color.adjust($text-color, $lightness: -10%);
-    }
-
-    .small-text {
-      font-size: 0.8rem;
-      color: color.adjust($text-color, $lightness: -30%);
-    }
-
-    strong {
-      color: $text-color;
-    }
-  }
-
-  // Sección de características
-  .footer-features {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: $spacing-xl;
-    padding: $spacing-md 0;
-    margin-bottom: $spacing-lg;
-
-    .feature {
+    .footer-about {
       display: flex;
-      align-items: center;
-      gap: $spacing-sm;
+      flex-direction: column;
+      gap: $spacing-md;
 
-      .feature-icon {
-        font-size: 1.5rem;
-        margin-right: 0.5rem;
-        color: #fff;
+      h3 {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-lg;
+      }
 
-        &.instagram {
-          color: #e4405f;
+      p {
+        margin-bottom: $spacing-md;
+        line-height: $line-height-base;
+        font-size: $font-size-sm;
+        color: color.adjust($text-color, $lightness: -10%);
+      }
+
+      .small-text {
+        font-size: $font-size-sm;
+        color: color.adjust($text-color, $lightness: -30%);
+      }
+
+      strong {
+        color: $text-color;
+      }
+
+      // Redes sociales dentro de About
+      .footer-social {
+        h4 {
+          margin-bottom: $spacing-sm;
+          font-size: $font-size-md;
         }
 
-        &.facebook {
-          color: #1877f2;
+        .footer-features {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-md;
+
+          .feature {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            gap: $spacing-sm;
+
+            span {
+              position: relative;
+              color: color.adjust($text-color, $lightness: -20%);
+              @include underline-hover($secondary-color, 2px, 0.3s, center);
+            }
+
+            .feature-icon {
+              font-size: $font-size-xl;
+              color: #fff;
+
+              &.instagram {
+                color: #e4405f;
+              }
+
+              &.facebook {
+                color: #1877f2;
+              }
+
+              &.twitter {
+                color: #1da1f2;
+              }
+
+              &.youtube {
+                color: #ff0000;
+              }
+            }
+
+            span {
+              font-size: $font-size-sm;
+            }
+          }
         }
-
-        &.twitter {
-          color: #1da1f2;
-        }
-
-        &.youtube {
-          color: #ff0000;
-        }
-      }
-
-      .quality-icon {
-        background-color: #3b7b4f;
-        color: #9fedb4;
-      }
-
-      .free-icon {
-        background-color: #3a4c8e;
-        color: #94a8ff;
-      }
-
-      .fast-icon {
-        background-color: #8e3a3a;
-        color: #ffaaa3;
-      }
-
-      .subtitle-icon {
-        background-color: #6b3a8e;
-        color: #d5a3ff;
-      }
-
-      span {
-        font-size: 0.9rem;
       }
     }
   }
 
-  // Navegación inferior
   .footer-bottom {
     border-top: 1px solid color.adjust($primary-color, $lightness: 10%);
     padding: $spacing-md 0;
 
-    .bottom-nav {
-      display: flex;
-      justify-content: center;
-      gap: $spacing-lg;
-
-      a {
-        color: color.adjust($text-color, $lightness: -30%);
-        text-decoration: none;
-        font-size: 0.8rem;
-
-        &:hover {
-          color: $secondary-color;
-        }
-      }
+    .copyright {
+      margin-top: $spacing-md;
+      font-size: $font-size-sm;
+      color: color.adjust($text-color, $lightness: -40%);
     }
   }
 }

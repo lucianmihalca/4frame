@@ -13,18 +13,20 @@ html,
 body {
   height: 100%;
   font-family: $font-family-base;
-  font-size: $font-size-base;
+  font-size: $font-size-md;
   line-height: 1.5;
   color: $text-color;
   background-color: $background-color;
 }
 
+// Aplicación principal
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+// Contenido principal
 main {
   flex: 1;
   padding: $spacing-md;
@@ -44,13 +46,15 @@ a {
   }
 }
 
+// Contenedor general
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: $container-max-width;
   margin: 0 auto;
   padding: 0 $spacing-md;
 }
 
+// Grid
 .grid-shows {
   @include grid(1fr, $spacing-md);
 
@@ -67,6 +71,7 @@ a {
   }
 }
 
+// Botones
 .btn {
   display: inline-block;
   padding: $spacing-sm $spacing-lg;
