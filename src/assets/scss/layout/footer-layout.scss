@@ -1,0 +1,166 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "sass:math";
+
+.footer {
+  background-color: $primary-color;
+  color: $text-color;
+  padding-top: $spacing-xl;
+
+  .container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+  }
+
+  .footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  // Columna de enlaces
+  .footer-links {
+    flex: 0 0 calc(50% - #{math.div($spacing-xl, 2)});
+    min-width: 280px;
+
+    .links-groups {
+      display: flex;
+      justify-content: space-between;
+      gap: $spacing-xl;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+
+    .links-group {
+      flex: 1;
+
+      h3 {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-lg;
+      }
+
+      .links-column {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+
+        a {
+          display: inline-flex;
+          align-self: flex-start;
+          position: relative;
+          color: color.adjust($text-color, $lightness: -20%);
+          text-decoration: none;
+          font-size: $font-size-sm;
+          @include underline-hover($secondary-color, 2px, 0.3s, center);
+        }
+      }
+    }
+  }
+
+  // Columna derecha: About + Redes
+  .footer-about-container {
+    flex: 0 0 calc(50% - #{math.div($spacing-xl, 2)});
+
+    min-width: 280px;
+
+    .footer-about {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      h3 {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-lg;
+      }
+
+      p {
+        margin-bottom: $spacing-md;
+        line-height: $line-height-base;
+        font-size: $font-size-sm;
+        color: color.adjust($text-color, $lightness: -10%);
+      }
+
+      .small-text {
+        font-size: $font-size-sm;
+        color: color.adjust($text-color, $lightness: -30%);
+      }
+
+      strong {
+        color: $text-color;
+      }
+
+      // Redes sociales dentro de About
+      .footer-social {
+        h4 {
+          margin-bottom: $spacing-sm;
+          font-size: $font-size-md;
+        }
+
+        .footer-features {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-md;
+
+          .feature {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            gap: $spacing-sm;
+
+            span {
+              position: relative;
+              color: color.adjust($text-color, $lightness: -20%);
+              @include underline-hover($secondary-color, 2px, 0.3s, center);
+            }
+
+            .feature-icon {
+              font-size: $font-size-xl;
+              color: #fff;
+
+              &.instagram {
+                color: #e4405f;
+              }
+
+              &.facebook {
+                color: #1877f2;
+              }
+
+              &.twitter {
+                color: #1da1f2;
+              }
+
+              &.youtube {
+                color: #ff0000;
+              }
+            }
+
+            span {
+              font-size: $font-size-sm;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid color.adjust($primary-color, $lightness: 10%);
+    padding: $spacing-md 0;
+
+    .copyright {
+      margin-top: $spacing-md;
+      font-size: $font-size-sm;
+      color: color.adjust($text-color, $lightness: -40%);
+    }
+  }
+}

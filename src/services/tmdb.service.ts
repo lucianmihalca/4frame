@@ -1,8 +1,8 @@
 import axios from "axios";
 import type { IApiResponse, IShowDetails } from "@/interfaces/show.interface";
 
-const API_KEY = "c6aeee577586ba38e487b74dfede5deb";
-const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const tmdbApi = axios.create({
   baseURL: BASE_URL,
@@ -12,7 +12,7 @@ const tmdbApi = axios.create({
   },
 });
 
-export const tmdbServices = {
+export const tmdbService = {
   getTvSeriesPopular: async (page: number = 1): Promise<IApiResponse> => {
     const response = await tmdbApi.get<IApiResponse>("/tv/popular", {
       params: { page },
