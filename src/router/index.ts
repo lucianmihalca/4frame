@@ -4,35 +4,35 @@ import HomeView from "../views/HomeView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Home
     {
       path: "/",
       name: "home",
       component: HomeView,
     },
-    {
-      path: "/show/:id",
-      name: "show-detail",
-      component: () => import("../views/ShowDetailView.vue"),
-    },
+
+    // Detalle de películas y series
     {
       path: "/movie/:id",
       name: "movie-detail",
       component: () => import("../views/MovieDetailView.vue"),
     },
     {
-      path: "/movies/now-playing",
-      name: "now-playing",
-      component: () => import("../views/NowPlayingView.vue"),
+      path: "/show/:id",
+      name: "tv-show",
+      component: () => import("../views/TvShowDetailView.vue"),
     },
+
+    // Listados de películas
     {
       path: "/movies",
       name: "movies",
       component: () => import("../views/MoviesView.vue"),
     },
     {
-      path: "/tv-shows",
-      name: "tv-shows",
-      component: () => import("../views/TvShowsView.vue"),
+      path: "/movies/now-playing",
+      name: "now-playing",
+      component: () => import("../views/NowPlayingView.vue"),
     },
     {
       path: "/movies/popular",
@@ -45,6 +45,14 @@ const router = createRouter({
       component: () => import("../views/TopRatedView.vue"),
     },
 
+    // Series
+    {
+      path: "/tv-shows",
+      name: "tv-shows",
+      component: () => import("../views/TvShowsView.vue"),
+    },
+
+    // Búsqueda y perfil
     {
       path: "/search",
       name: "search",

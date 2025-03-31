@@ -1,11 +1,8 @@
 import axios from "axios";
-import type {
-  IBaseApiResponse,
-  IMovie,
-  IMovieDetails,
-  ITvShow,
-  ITvShowDetails,
-} from "../interfaces/show.interface";
+import type { IBaseApiResponse } from "../interfaces/api-response.interface";
+import type { IMovie, IMovieDetails } from "@/interfaces/movie.interface";
+import type { ITvShow, ITvShowDetails } from "@/interfaces/tv-show.interface";
+import type { ICredits, IVideosResponse } from "@/interfaces/media-extra.interface";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -54,6 +51,25 @@ export const tmdbService = {
 
   getTvSeriesDetails: async (id: number): Promise<ITvShowDetails> => {
     const response = await tmdbApi.get(`/tv/${id}`);
+    return response.data;
+  },
+
+  getTvSeriesCredits: async (id: number): Promise<ICredits> => {
+    const response = await tmdbApi.get(`/tv/${id}/credits`);
+    return response.data;
+  },
+
+  getTvSeriesVideos: async (id: number): Promise<IVideosResponse> => {
+    const response = await tmdbApi.get(`/tv/${id}/videos`);
+    return response.data;
+  },
+  getTvSeriesSimilar: async (id: number): Promise<IBaseApiResponse<ITvShow>> => {
+    const response = await tmdbApi.get(`/tv/${id}/similar`);
+    return response.data;
+  },
+
+  getTvSeriesRecommendations: async (id: number): Promise<IBaseApiResponse<ITvShow>> => {
+    const response = await tmdbApi.get(`/tv/${id}/recommendations`);
     return response.data;
   },
 

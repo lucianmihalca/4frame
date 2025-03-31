@@ -77,22 +77,14 @@
   }
 }
 
-.skeleton-image {
+.fallback-icon {
   width: 100%;
-  padding-top: 150%; // mantiene la proporción del poster
-  background-color: color.adjust($text-color, $lightness: -85%);
+  aspect-ratio: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color.adjust($card-background, $lightness: 5%);
   border-radius: $border-radius-md;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0% {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-  50% {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  100% {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
+  font-size: 2rem;
+  color: color.adjust($text-color, $lightness: -40%);
 }
