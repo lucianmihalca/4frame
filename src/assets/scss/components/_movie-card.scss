@@ -1,0 +1,98 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.movie-card {
+  cursor: pointer;
+  border-radius: $border-radius-md;
+
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.poster {
+  position: relative;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.image.hidden {
+  display: none;
+}
+
+.movie-card:hover .image {
+  transform: scale(1.05);
+}
+
+.info {
+  padding: $spacing-md;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: $font-size-md;
+  margin-bottom: $spacing-sm;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  color: color.adjust($text-color, $lightness: -20%);
+  margin-top: auto;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  .star-icon {
+    color: $accent-color;
+  }
+}
+
+.skeleton-image {
+  width: 100%;
+  padding-top: 150%; // mantiene la proporción del poster
+  background-color: color.adjust($text-color, $lightness: -85%);
+  border-radius: $border-radius-md;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}

@@ -1,16 +1,40 @@
-export interface IShow {
+// BASE COMÚN
+export interface IMediaBase {
   id: number;
-  name: string;
   overview: string;
   poster_path: string;
   backdrop_path: string;
   vote_average: number;
-  first_air_date: string;
   popularity: number;
   genre_ids: number[];
 }
 
-export interface IShowDetails extends IShow {
+// PELÍCULAS
+export interface IMovie extends IMediaBase {
+  title: string;
+  release_date: string;
+}
+
+export interface IMovieDetails extends IMovie {
+  genres: IGenre[];
+  homepage: string;
+  production_companies: ICompany[];
+  runtime: number;
+  status: string;
+  tagline: string;
+  vote_count: number;
+  budget: number;
+  revenue: number;
+}
+
+// SERIES DE TV
+
+export interface ITvShow extends IMediaBase {
+  name: string;
+  first_air_date: string;
+}
+
+export interface ITvShowDetails extends ITvShow {
   created_by: ICreator[];
   episode_run_time: number[];
   genres: IGenre[];
@@ -27,6 +51,13 @@ export interface IShowDetails extends IShow {
   type: string;
   vote_count: number;
 }
+
+// TIPOS UNIFICADOS
+
+export type IMedia = IMovie | ITvShow;
+export type IMediaDetails = IMovieDetails | ITvShowDetails;
+
+// AUXILIARES para componentes de medios
 
 export interface ICreator {
   id: number;
@@ -63,9 +94,10 @@ export interface ISeason {
   season_number: number;
 }
 
-export interface IApiResponse {
+// RESPUESTAS DE API
+export interface IBaseApiResponse<T> {
   page: number;
-  results: IShow[];
+  results: T[];
   total_pages: number;
   total_results: number;
 }

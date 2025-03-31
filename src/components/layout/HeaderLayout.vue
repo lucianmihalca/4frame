@@ -10,8 +10,8 @@
         <nav class="nav primary-nav">
           <ul>
             <li><router-link to="/" class="link">HOME</router-link></li>
-            <li><router-link to="/for-you" class="link">FOR YOU</router-link></li>
             <li><router-link to="/movies" class="link">MOVIES</router-link></li>
+            <li><router-link to="/movies/now-playing" class="link">NOW PLAYING</router-link></li>
             <li><router-link to="/tv-shows" class="link">TV SHOWS</router-link></li>
           </ul>
         </nav>
@@ -31,8 +31,8 @@
       <div class="right-block">
         <nav class="nav secondary-nav">
           <ul>
-            <li><router-link to="/favorites" class="link">FAVORITES</router-link></li>
-            <li><router-link to="/my-list" class="link">MY LIST</router-link></li>
+            <li><router-link to="/movies/popular" class="link">POPULAR</router-link></li>
+            <li><router-link to="/movies/top-rated" class="link">TOP RATED</router-link></li>
           </ul>
         </nav>
 
@@ -70,5 +70,5 @@ const goToSearch = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/layout/header-layout.scss";
+@use "../../assets/scss/layout/_header.scss";
 </style>

@@ -99,5 +99,5 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/layout/footer-layout.scss";
+@use "../../assets/scss/layout/_footer.scss";
 </style>
