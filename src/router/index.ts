@@ -15,9 +15,14 @@ const router = createRouter({
       component: () => import("../views/ShowDetailView.vue"),
     },
     {
-      path: "/for-you",
-      name: "for-you",
-      component: () => import("../views/ForYouView.vue"),
+      path: "/movie/:id",
+      name: "movie-detail",
+      component: () => import("../views/MovieDetailView.vue"),
+    },
+    {
+      path: "/movies/now-playing",
+      name: "now-playing",
+      component: () => import("../views/NowPlayingView.vue"),
     },
     {
       path: "/movies",
@@ -30,14 +35,14 @@ const router = createRouter({
       component: () => import("../views/TvShowsView.vue"),
     },
     {
-      path: "/favorites",
-      name: "favorites",
-      component: () => import("../views/FavoritesView.vue"),
+      path: "/movies/popular",
+      name: "popular",
+      component: () => import("../views/PopularView.vue"),
     },
     {
-      path: "/my-list",
-      name: "my-list",
-      component: () => import("../views/MyListView.vue"),
+      path: "/movies/top-rated",
+      name: "top-rated",
+      component: () => import("../views/TopRatedView.vue"),
     },
 
     {

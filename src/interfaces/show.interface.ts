@@ -1,4 +1,4 @@
-// Interfaz base común
+// BASE COMÚN
 export interface IMediaBase {
   id: number;
   overview: string;
@@ -9,23 +9,32 @@ export interface IMediaBase {
   genre_ids: number[];
 }
 
-// Interfaz para series
-export interface IShow extends IMediaBase {
-  name: string;
-  first_air_date: string;
-}
-
-// Interfaz para películas
+// PELÍCULAS
 export interface IMovie extends IMediaBase {
   title: string;
   release_date: string;
 }
 
-// Interfaz para resultados que pueden ser película o serie
-export type IMedia = IMovie | IShow;
+export interface IMovieDetails extends IMovie {
+  genres: IGenre[];
+  homepage: string;
+  production_companies: ICompany[];
+  runtime: number;
+  status: string;
+  tagline: string;
+  vote_count: number;
+  budget: number;
+  revenue: number;
+}
 
-// Detalles para series
-export interface IShowDetails extends IShow {
+// SERIES DE TV
+
+export interface ITvShow extends IMediaBase {
+  name: string;
+  first_air_date: string;
+}
+
+export interface ITvShowDetails extends ITvShow {
   created_by: ICreator[];
   episode_run_time: number[];
   genres: IGenre[];
@@ -43,23 +52,13 @@ export interface IShowDetails extends IShow {
   vote_count: number;
 }
 
-// Interfaz para detalles de películas
-export interface IMovieDetails extends IMovie {
-  genres: IGenre[];
-  homepage: string;
-  production_companies: ICompany[];
-  runtime: number;
-  status: string;
-  tagline: string;
-  vote_count: number;
-  budget: number;
-  revenue: number;
-}
+// TIPOS UNIFICADOS
 
-// Tipo que representa detalles de cualquier medio
-export type IMediaDetails = IShowDetails | IMovieDetails;
+export type IMedia = IMovie | ITvShow;
+export type IMediaDetails = IMovieDetails | ITvShowDetails;
 
-// Interfaces para componentes de medios
+// AUXILIARES para componentes de medios
+
 export interface ICreator {
   id: number;
   name: string;
@@ -95,10 +94,10 @@ export interface ISeason {
   season_number: number;
 }
 
-// Respuesta API (ahora maneja tanto películas como series)
-export interface IApiResponse {
+// RESPUESTAS DE API
+export interface IBaseApiResponse<T> {
   page: number;
-  results: IMedia[];
+  results: T[];
   total_pages: number;
   total_results: number;
 }
