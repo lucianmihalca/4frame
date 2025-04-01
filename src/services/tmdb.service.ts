@@ -37,6 +37,21 @@ export const tmdbService = {
     return response.data;
   },
 
+  getMovieCredits: async (id: number): Promise<ICredits> => {
+    const response = await tmdbApi.get(`/movie/${id}/credits`);
+    return response.data;
+  },
+
+  getMovieRecommendations: async (id: number): Promise<IBaseApiResponse<IMovie>> => {
+    const response = await tmdbApi.get(`/movie/${id}/recommendations`);
+    return response.data;
+  },
+
+  getMovieSimilar: async (id: number): Promise<IBaseApiResponse<IMovie>> => {
+    const response = await tmdbApi.get(`/movie/${id}/similar`);
+    return response.data;
+  },
+
   searchMovies: async (query: string, page = 1): Promise<IBaseApiResponse<IMovie>> => {
     const response = await tmdbApi.get("/search/movie", { params: { query, page } });
     return response.data;

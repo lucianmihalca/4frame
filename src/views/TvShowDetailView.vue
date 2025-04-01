@@ -1,7 +1,7 @@
 <template>
   <div class="tv-show-detail-view">
     <!--  Imagen de fondo -->
-    <TvShowHero :tvShow="tvShow" />
+    <MediaHero :media="tvShow" />
 
     <!-- Selector de temporadas y listado de episodios -->
     <div class="tv-show-season-selector container">
@@ -18,38 +18,38 @@
     <main class="tv-show-detail-layout container">
       <!-- Columna póster + comentarios -->
       <div class="left-column">
-        <TvShowPoster :tvShow="tvShow" />
+        <MediaPoster :media="tvShow" />
       </div>
 
       <!-- Columna información principal -->
       <div class="center-column">
         <div class="info-top">
-          <TvShowHeaderInfo :tvShow="tvShow" />
+          <MediaHeaderInfo :media="tvShow" />
         </div>
 
         <div class="details-grid">
-          <TvShowOverviewInfo :tvShow="tvShow" />
+          <MediaOverviewInfo :media="tvShow" />
         </div>
       </div>
 
       <!-- Columna detalles extra -->
       <aside class="right-column">
         <div class="synopsis">
-          <TvShowExtraInfo :tvShow="tvShow" />
+          <MediaExtraInfo :media="tvShow" />
         </div>
       </aside>
     </main>
 
     <!-- Recomendaciones y similares -->
     <div class="bottom-recommendations container">
-      <TvShowRecommendations :shows="recommendations.results" />
-      <TvShowSimilar :shows="similar.results" />
+      <MediaRecommendations :shows="recommendations.results" />
+      <MediaSimilar :shows="similar.results" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import type { ITvShowDetails } from "@/interfaces/tv-show.interface";
@@ -59,15 +59,15 @@ import type { ITvShow } from "@/interfaces/tv-show.interface";
 
 import { tmdbService } from "@/services/tmdb.service";
 
-import TvShowHero from "@/components/views/TvShowHero.vue";
-import TvShowSeasons from "@/components/views/TvShowSeasons.vue";
-import TvShowEpisodes from "@/components/views/TvShowEpisodes.vue";
-import TvShowPoster from "@/components/views/TvShowPoster.vue";
-import TvShowHeaderInfo from "@/components/views/TvShowHeaderInfo.vue";
-import TvShowOverviewInfo from "@/components/views/TvShowOverviewInfo.vue";
-import TvShowExtraInfo from "@/components/views/TvShowExtraInfo.vue";
-import TvShowRecommendations from "@/components/views/TvShowRecommendations.vue";
-import TvShowSimilar from "@/components/views/TvShowSimilar.vue";
+import MediaHero from "../components/views/MediaHero.vue";
+import TvShowSeasons from "../components/views/TvShowSeasons.vue";
+import TvShowEpisodes from "../components/views/TvShowEpisodes.vue";
+import MediaPoster from "../components/views/MediaPoster.vue";
+import MediaHeaderInfo from "../components/views/MediaHeaderInfo.vue";
+import MediaOverviewInfo from "../components/views/MediaOverviewInfo.vue";
+import MediaExtraInfo from "../components/views/MediaExtraInfo.vue";
+import MediaRecommendations from "../components/views/MediaRecommendations.vue";
+import MediaSimilar from "../components/views/MediaSimilar.vue";
 
 const route = useRoute();
 const tvShowId = Number(route.params.id);
@@ -93,19 +93,31 @@ const handleSeasonSelected = (seasonNumber: number) => {
   selectedSeason.value = seasonNumber;
 };
 
-// Lifecycle
-onMounted(async () => {
-  tvShow.value = await tmdbService.getTvSeriesDetails(tvShowId);
+const fetchTvShowData = async (id: number) => {
+  tvShow.value = await tmdbService.getTvSeriesDetails(id);
 
   if (Array.isArray(tvShow.value.seasons) && tvShow.value.seasons.length > 0) {
     selectedSeason.value = tvShow.value.seasons[0].season_number;
   }
 
-  credits.value = await tmdbService.getTvSeriesCredits(tvShowId);
-  videos.value = await tmdbService.getTvSeriesVideos(tvShowId);
-  recommendations.value = await tmdbService.getTvSeriesRecommendations(tvShowId);
-  similar.value = await tmdbService.getTvSeriesSimilar(tvShowId);
+  credits.value = await tmdbService.getTvSeriesCredits(id);
+  videos.value = await tmdbService.getTvSeriesVideos(id);
+  recommendations.value = await tmdbService.getTvSeriesRecommendations(id);
+  similar.value = await tmdbService.getTvSeriesSimilar(id);
+};
+
+onMounted(() => {
+  fetchTvShowData(tvShowId);
 });
+
+watch(
+  () => route.params.id,
+  (newId) => {
+    if (newId) {
+      fetchTvShowData(Number(newId));
+    }
+  }
+);
 </script>
 
 <style scoped lang="scss">

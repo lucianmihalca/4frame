@@ -1,0 +1,13 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.media-overview-info {
+  margin: 1.5rem 0;
+
+  .overview-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+  }
+}

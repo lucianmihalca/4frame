@@ -29,11 +29,6 @@ body {
 // Contenido principal
 main {
   flex: 1;
-  padding: $spacing-md;
-
-  @include responsive(md) {
-    padding: $spacing-lg;
-  }
 }
 
 a {
