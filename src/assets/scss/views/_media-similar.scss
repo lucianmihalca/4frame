@@ -1,0 +1,37 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.media-similar {
+  margin-top: 2rem;
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .similars-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .similar-card {
+    cursor: pointer;
+    text-align: center;
+
+    .poster {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.media-extra-info {
+  display: grid;
+  gap: 1.5rem;
+
+  .info-item {
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #ccc;
+    }
+
+    a {
+      color: $secondary-color;
+      text-decoration: underline;
+    }
+  }
+}

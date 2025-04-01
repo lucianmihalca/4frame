@@ -1,0 +1,30 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.tv-shows-view {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  .section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .shows-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: center;
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .error {
+    color: #ef4444;
+  }
+}

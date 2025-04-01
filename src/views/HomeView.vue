@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { tmdbService } from "@/services/tmdb.service";
-import type { IMedia } from "@/interfaces/show.interface";
+import { tmdbService } from "../services/tmdb.service";
+import type { IMedia } from "../interfaces/media-union.interface";
 import MovieCard from "../components/MovieCard.vue";
 
 const movies = ref<IMedia[]>([]);
@@ -30,7 +30,7 @@ const error = ref<string | null>(null);
 
 onMounted(async () => {
   try {
-    const response = await tmdbService.getMoviesPopular(); // Usamos el endpoint de películas
+    const response = await tmdbService.getMoviesPopular();
     movies.value = response.results;
   } catch (err) {
     console.error("Error cargando películas:", err);
