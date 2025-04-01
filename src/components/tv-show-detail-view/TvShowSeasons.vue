@@ -1,91 +1,132 @@
 <template>
-  <section class="tv-show-seasons" v-if="tvShow.seasons?.length">
-    <h2 class="section-title">Temporadas</h2>
-
-    <div class="seasons-grid">
-      <div class="season-card" v-for="season in tvShow.seasons" :key="season.id">
-        <img
-          v-if="season.poster_path"
-          :src="`https://image.tmdb.org/t/p/w300${season.poster_path}`"
-          :alt="season.name"
-          class="season-poster"
-        />
-        <div class="season-info">
-          <h3>{{ season.name }}</h3>
-          <p class="season-meta">
-            {{ season.air_date ? formatDate(season.air_date) : "Sin fecha" }} •
-            {{ season.episode_count }} episodios
-          </p>
-          <p class="season-overview">{{ season.overview || "Sin descripción." }}</p>
-        </div>
-      </div>
+  <div class="tv-show-seasons-header">
+    <div class="actions">
+      <button class="action-button">
+        <font-awesome-icon :icon="['fas', 'video']" />
+        Trailer
+      </button>
+      <button class="action-button">
+        <font-awesome-icon :icon="['far', 'heart']" />
+        Add to favorite
+      </button>
+      <button class="action-button">
+        <font-awesome-icon :icon="['far', 'comment']" />
+        Comment
+      </button>
     </div>
-  </section>
+
+    <div class="season-selector">
+      <font-awesome-icon :icon="['fas', 'list']" class="list-icon" />
+      <select v-model="selectedId" @change="emitSelection">
+        <option v-for="season in seasons" :key="season.id" :value="season.season_number">
+          Season {{ season.season_number }}
+        </option>
+      </select>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { ITvShowDetails } from "@/interfaces/tv-show.interface";
+import { ref, watch } from "vue";
+import type { ISeason } from "@/interfaces/media-base.interface";
 
-const { tvShow } = defineProps<{ tvShow: ITvShowDetails }>();
+const emit = defineEmits<{
+  (e: "seasonSelected", seasonNumber: number): void;
+}>();
 
-const formatDate = (dateStr: string): string => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+const props = defineProps<{
+  seasons: ISeason[];
+  initialSeason?: number;
+}>();
+
+const selectedId = ref(props.initialSeason ?? props.seasons[0].season_number);
+
+const emitSelection = () => {
+  emit("seasonSelected", selectedId.value);
 };
+
+watch(
+  () => props.initialSeason,
+  (val) => {
+    if (val !== undefined) selectedId.value = val;
+  }
+);
 </script>
 
 <style scoped lang="scss">
 @use "@/assets/scss/variables" as *;
-@use "@/assets/scss/mixins" as *;
 
-.tv-show-seasons {
-  margin-top: 2rem;
+.tv-show-seasons-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 1.5rem 0;
 
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  // Centrado en móviles
+  @media (max-width: 768px) {
+    .actions,
+    .season-selector {
+      justify-content: center;
+    }
   }
 
-  .seasons-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-
-  .season-card {
+  .actions {
     display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 0.8rem;
 
-    .season-poster {
-      width: 100%;
-      object-fit: cover;
+    .action-button {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: transparent;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      svg {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .season-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .list-icon {
+      font-size: 1.1rem;
+      color: #ccc;
     }
 
-    .season-info {
-      padding: 1rem;
+    select {
+      cursor: pointer;
+      min-width: 140px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      color: white;
+      font-size: 0.9rem;
 
-      h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.3rem;
+      option {
+        color: black;
       }
 
-      .season-meta {
-        font-size: 0.9rem;
-        color: #ccc;
-        margin-bottom: 0.5rem;
-      }
-
-      .season-overview {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        color: #ddd;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
       }
     }
   }

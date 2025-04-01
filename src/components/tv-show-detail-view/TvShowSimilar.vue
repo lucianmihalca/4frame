@@ -3,7 +3,12 @@
     <h2 class="section-title">Series similares</h2>
 
     <div class="similars-grid">
-      <div v-for="show in shows" :key="show.id" class="similar-card" @click="goToDetail(show.id)">
+      <div
+        v-for="show in limitedShows"
+        :key="show.id"
+        class="similar-card"
+        @click="goToDetail(show.id)"
+      >
         <img
           v-if="show.poster_path"
           :src="`https://image.tmdb.org/t/p/w185${show.poster_path}`"
@@ -19,9 +24,12 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import type { ITvShow } from "@/interfaces/tv-show.interface";
+import { computed } from "vue";
 
 const { shows } = defineProps<{ shows: ITvShow[] }>();
 const router = useRouter();
+
+const limitedShows = computed(() => shows.slice(0, 7));
 
 const goToDetail = (id: number) => {
   router.push({ name: "tv-show", params: { id } });

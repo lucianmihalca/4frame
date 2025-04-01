@@ -20,6 +20,15 @@ export interface ICredits {
   crew: ICrewMember[];
 }
 
+export interface IEpisode {
+  id: number;
+  name: string;
+  overview: string;
+  still_path: string | null;
+  episode_number: number;
+  air_date: string;
+}
+
 // Videos
 export interface IVideo {
   id: string;

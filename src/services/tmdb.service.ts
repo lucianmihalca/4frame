@@ -2,7 +2,7 @@ import axios from "axios";
 import type { IBaseApiResponse } from "../interfaces/api-response.interface";
 import type { IMovie, IMovieDetails } from "@/interfaces/movie.interface";
 import type { ITvShow, ITvShowDetails } from "@/interfaces/tv-show.interface";
-import type { ICredits, IVideosResponse } from "@/interfaces/media-extra.interface";
+import type { ICredits, IVideosResponse, IEpisode } from "@/interfaces/media-extra.interface";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -11,7 +11,7 @@ const tmdbApi = axios.create({
   baseURL: BASE_URL,
   params: {
     api_key: API_KEY,
-    language: "es-ES",
+    language: "en-US",
   },
 });
 
@@ -63,6 +63,12 @@ export const tmdbService = {
     const response = await tmdbApi.get(`/tv/${id}/videos`);
     return response.data;
   },
+
+  getTvSeriesEpisodes: async (tvShowId: number, seasonNumber: number): Promise<IEpisode[]> => {
+    const response = await tmdbApi.get(`/tv/${tvShowId}/season/${seasonNumber}`);
+    return response.data.episodes;
+  },
+
   getTvSeriesSimilar: async (id: number): Promise<IBaseApiResponse<ITvShow>> => {
     const response = await tmdbApi.get(`/tv/${id}/similar`);
     return response.data;
