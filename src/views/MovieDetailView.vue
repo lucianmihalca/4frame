@@ -83,14 +83,10 @@ const fetchMovieData = async (id: number) => {
   credits.value = await tmdbService.getMovieCredits(id);
   recommendations.value = await tmdbService.getMovieRecommendations(id);
   similar.value = await tmdbService.getMovieSimilar(id);
-
-  console.log("Similar results loaded:", similar.value.results);
 };
 
 onMounted(() => {
-  fetchMovieData(movieId).then(() => {
-    console.log("Similar titles loaded on first mount:", similar.value.results);
-  });
+  fetchMovieData(movieId).then(() => {});
 });
 
 watch(
