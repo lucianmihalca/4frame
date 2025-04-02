@@ -8,7 +8,7 @@
           <font-awesome-icon :icon="['fas', 'play']" />
         </span>
         <span class="episode-number">
-          <strong>Eps {{ episode.episode_number }}: Temporada {{ seasonNumber }}</strong>
+          <strong>Eps {{ episode.episode_number }}: Season{{ seasonNumber }}</strong>
         </span>
       </div>
     </div>
