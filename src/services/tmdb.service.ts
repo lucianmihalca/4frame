@@ -22,6 +22,11 @@ export const tmdbService = {
     return response.data;
   },
 
+  getMoviesUpcoming: async (page = 1): Promise<IBaseApiResponse<IMovie>> => {
+    const response = await tmdbApi.get("/movie/upcoming", { params: { page } });
+    return response.data;
+  },
+
   getMoviesNowPlaying: async (page = 1): Promise<IBaseApiResponse<IMovie>> => {
     const response = await tmdbApi.get("/movie/now_playing", { params: { page } });
     return response.data;
@@ -61,6 +66,11 @@ export const tmdbService = {
 
   getTvSeriesPopular: async (page = 1): Promise<IBaseApiResponse<ITvShow>> => {
     const response = await tmdbApi.get("/tv/popular", { params: { page } });
+    return response.data;
+  },
+
+  getTvSeriesUpcoming: async (page = 1): Promise<IBaseApiResponse<ITvShow>> => {
+    const response = await tmdbApi.get("/tv/on_the_air", { params: { page } });
     return response.data;
   },
 

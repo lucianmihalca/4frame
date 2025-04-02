@@ -1,4 +1,6 @@
 <template>
+  <UpcomingMediaCarousel v-if="movies.length" :items="movies" titleKey="title" />
+
   <div class="home-view">
     <section class="section-title">
       <h2>Películas Populares</h2>
@@ -23,6 +25,7 @@ import { ref, onMounted } from "vue";
 import { tmdbService } from "../services/tmdb.service";
 import type { IMedia } from "../interfaces/media-union.interface";
 import MovieCard from "../components/MovieCard.vue";
+import UpcomingMediaCarousel from "../components/views/UpcomingMediaCarousel.vue";
 
 const movies = ref<IMedia[]>([]);
 const loading = ref(true);

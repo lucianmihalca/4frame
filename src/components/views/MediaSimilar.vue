@@ -1,8 +1,8 @@
 <template>
-  <section class="media-similar" v-if="shows?.length">
-    <h2 class="section-title">Similar titles</h2>
+  <section class="media-similar">
+    <h2 class="section-title" v-if="limitedShows.length">Similar titles</h2>
 
-    <div class="similars-grid">
+    <div class="similars-grid" v-if="limitedShows.length">
       <div
         v-for="show in limitedShows"
         :key="show.id"
@@ -17,6 +17,10 @@
         />
         <p class="title">{{ getTitle(show) }}</p>
       </div>
+    </div>
+
+    <div v-else class="no-similar">
+      <p>No similar titles found.</p>
     </div>
   </section>
 </template>
