@@ -3,14 +3,13 @@
 @use "../mixins" as *;
 
 .upcoming-media-carousel {
-  height: 80vh;
+  height: calc(100vh - 90px);
   position: relative;
   color: white;
   overflow: hidden;
   width: 100%;
 
   .overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
     width: 100%;
     height: 100%;
     display: flex;
@@ -18,6 +17,22 @@
     justify-content: flex-end;
     position: absolute;
     z-index: 1;
+
+    background:
+    /* Gradiente radial para efecto spotlight */ radial-gradient(
+        circle at 30% 10%,
+        /* Puedes ajustar la posición del centro */ transparent 20%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0.5) 100%
+      ),
+      /* Gradiente superior (transparente a negro) */
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 50%),
+      /* Gradiente inferior (transparente a negro) */
+        linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 70%),
+      /* Gradiente izquierdo (transparente a negro) */
+        linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, transparent 7%),
+      /* Gradiente derecho (transparente a negro) */
+        linear-gradient(to left, rgba(0, 0, 0, 0.2) 0%, transparent 7%);
 
     .content {
       max-width: 1200px;
@@ -119,7 +134,7 @@
       background: radial-gradient(
         circle at center,
         transparent 10%,
-        rgba(0, 0, 0, 0.4) 70%,
+        rgba(0, 0, 0, 0.4) 40%,
         rgba(0, 0, 0, 0.7) 100%
       );
       z-index: 1;
