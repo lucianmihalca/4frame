@@ -1,39 +1,58 @@
 # 4frame
 
-This template should help get you started developing with Vue 3 in Vite.
+Esta plantilla te ayudará a comenzar a desarrollar con Vue 3 en Vite.
 
-## Recommended IDE Setup
+## Configuración de IDE recomendada
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) +
+[Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (y
+desactivar Vetur).
 
-## Type Support for `.vue` Imports in TS
+## Soporte de tipos para importaciones `.vue` en TS
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+TypeScript no puede manejar la información de tipos para importaciones `.vue`
+por defecto, por lo que reemplazamos el CLI `tsc` con `vue-tsc` para la
+comprobación de tipos. En los editores, necesitamos
+[Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) para que
+el servicio de lenguaje TypeScript reconozca los tipos `.vue`.
 
-## Customize configuration
+## Personalizar configuración
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Ver [Referencia de configuración de Vite](https://vite.dev/config/).
 
-## Project Setup
+## Configuración del proyecto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilar y recarga en caliente para desarrollo
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Verificar tipos, compilar y minificar para producción
 
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint con [ESLint](https://eslint.org/)
 
 ```sh
 npm run lint
 ```
+
+## Variables de entorno
+
+Es necesario crear un archivo `.env` en la raíz del proyecto con el siguiente
+formato:
+
+```
+VITE_API_KEY=
+VITE_BASE_URL="https://api.themoviedb.org/3"
+```
+
+Debes obtener tu propia API_KEY de
+[The Movie Database](https://www.themoviedb.org/) y agregarla al archivo `.env`.
