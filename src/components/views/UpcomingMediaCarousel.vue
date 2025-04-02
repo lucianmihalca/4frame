@@ -1,6 +1,6 @@
 <!-- UpcomingMediaCarousel.vue -->
 <template>
-  <section class="upcoming-carousel">
+  <section class="upcoming-media-carousel">
     <transition-group name="slide" tag="div" class="slider-wrapper">
       <div class="slide" v-if="current" :key="current.id" :style="backgroundImageStyle">
         <div class="gradient-spotlight"></div>
@@ -97,5 +97,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../../assets/scss/views/upcoming-carousel";
+@use "../../assets/scss/views/upcoming-media-carousel";
 </style>
