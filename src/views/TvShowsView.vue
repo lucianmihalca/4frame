@@ -1,4 +1,6 @@
 <template>
+  <UpcomingMediaCarousel :items="shows" titleKey="name" />
+
   <div class="tv-shows-view">
     <section class="section-title">
       <h2>Series Populares</h2>
@@ -23,6 +25,7 @@ import { ref, onMounted } from "vue";
 import { tmdbService } from "@/services/tmdb.service";
 import MovieCard from "@/components/MovieCard.vue";
 import type { IMedia } from "@/interfaces/media-union.interface";
+import UpcomingMediaCarousel from "@/components/views/UpcomingMediaCarousel.vue";
 
 const shows = ref<IMedia[]>([]);
 const loading = ref(true);

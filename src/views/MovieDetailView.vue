@@ -36,7 +36,7 @@
         :shows="recommendations.results"
       />
 
-      <MediaSimilar v-if="similar.results.length" :shows="similar.results" />
+      <MediaSimilar :shows="similar.results" />
     </div>
   </div>
 </template>
