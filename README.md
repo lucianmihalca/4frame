@@ -26,7 +26,7 @@ Ver [Referencia de configuración de Vite](https://vite.dev/config/).
 npm install
 ```
 
-### Compilar y recarga en caliente para desarrollo
+### Compilar y recarga para desarrollo
 
 ```sh
 npm run dev
