@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { ISeason } from "@/interfaces/media-base.interface";
+import type { ISeason } from "../../interfaces/media-base.interface";
 
 const emit = defineEmits<{
   (e: "seasonSelected", seasonNumber: number): void;
